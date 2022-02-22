@@ -7,6 +7,8 @@ export const initialState = {
   sessionKey: null,
   login: null,
   sublogin: null,
+  showAlert: false,
+  alertMessage: null,
 };
 
 export default {
@@ -40,6 +42,13 @@ export default {
           ...state,
           loading: false,
           sessionKey: null,
+        };
+      },
+      [ActionTypes.SHOW_ALERT]: (state, { payload }) => {
+        return {
+          ...state,
+          showAlert: payload.showAlert,
+          alertMessage: payload.alertMessage,
         };
       },
     },

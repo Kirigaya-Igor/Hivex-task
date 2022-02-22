@@ -14,11 +14,18 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "./",
+    "paths": {
+      "@actions/*": ["src/store/actions/*"],
+      "@reducers/*": ["src/store/reducers/*"],
+      "@sagas/*": ["src/store/sagas/*"],
+      "@constans/*": ["src/store/constans/*"]
+    }
   },
   "include": [
     "src",

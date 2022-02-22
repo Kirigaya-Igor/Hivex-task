@@ -2,7 +2,7 @@ import { all, put, call, takeLatest } from 'redux-saga/effects';
 import api from '../../helpers/sendsay';
 
 import { ActionTypes } from '../constants';
-import { authenticateSuccess, authenticateFailure } from '../actions/auth';
+import { authenticateSuccess, authenticateFailure, showAlert } from '../actions/auth';
 
 export function* authenticateCheckSaga() {
   try {
@@ -19,20 +19,27 @@ export function* authenticateCheckSaga() {
 
 //@ts-ignore
 export function* authenticateSaga({ payload }) {
-  yield api.sendsay
-    .login({
-      login: payload.login,
-      sublogin: payload.sublogin,
-      password: payload.password,
-    })
-    .then(() => {
-      document.cookie = `sendsay_session=${api.sendsay.session}`;
-    })
-    //@ts-ignore
-    .catch(err => {
-      document.cookie = '';
-      console.log('err', err);
-    });
+  try {
+    yield api.sendsay
+      .login({
+        login: payload.login,
+        sublogin: payload.sublogin,
+        password: payload.password,
+      })
+      .then(() => {
+        document.cookie = `sendsay_session=${api.sendsay.session}`;
+      });
+  } catch (e) {
+    console.log('err', e);
+    document.cookie = '';
+    yield put(
+      showAlert({
+        showAlert: true,
+        //@ts-ignore
+        alertMessage: { id: e.id, explain: e.explain },
+      })
+    );
+  }
 
   yield put(
     authenticateSuccess({

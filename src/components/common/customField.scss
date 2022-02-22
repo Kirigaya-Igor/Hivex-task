@@ -1,0 +1,32 @@
+.inputBlock {
+  margin-bottom: 20px;
+
+  .redText {
+    color: red;
+  }
+    
+  .label {
+    color: black;
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+    
+  .customField {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 100%;
+    min-height: 40px;
+    font-size: 16px;
+    padding: 0px 10px;
+    margin-top: 5px;
+  
+    &::-webkit-input-placeholder {
+      color: black;
+      opacity: 80%;
+    }
+  }
+}

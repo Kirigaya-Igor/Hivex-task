@@ -1,13 +1,14 @@
+// eslint-disable-next-line no-undef
 module.exports = {
   root: true,
   extends: [
     'eslint:recommended',
     'plugin:prettier/recommended',
-    'plugin:react/recommended', // Uses the recommended rules from @eslint-plugin-react
-    'plugin:@typescript-eslint/eslint-recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
-    'plugin:@typescript-eslint/recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
-  parser: '@typescript-eslint/parser', // Specifies the ESLint parser
+  parser: '@typescript-eslint/parser',
   env: {
     browser: true,
     es6: true,
@@ -36,14 +37,18 @@ module.exports = {
   },
   rules: {
     'comma-dangle': 'off',
-    'function-paren-newline': 'off',
-    'global-require': 'off',
     'import/no-dynamic-require': 'off',
     'no-inner-declarations': 'off',
-    'class-methods-use-this': 'off',
     'import/extensions': 'off',
     'import/prefer-default-export': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
   },
 };
