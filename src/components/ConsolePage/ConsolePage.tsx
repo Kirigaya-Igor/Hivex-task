@@ -1,5 +1,10 @@
 import React from 'react';
+import { ConsoleHeader } from '../ConsoleHeader/ConsoleHeader';
 
 export const ConsolePage: React.FC = () => {
-  return <div>ConsolePage</div>;
+  return (
+    <div>
+      <ConsoleHeader />
+    </div>
+  );
 };

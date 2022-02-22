@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './alert.scss';
-import errorIcon from './errorIcon.png';
 import { showAlert } from '../../store/actions/auth';
 
 export const Alert: React.FC = () => {
@@ -40,7 +39,7 @@ export const Alert: React.FC = () => {
       {showAlertState && (
         <div className='alert alert-dismissible alert-warning'>
           <div className='d-flex align-items-center'>
-            <img src={errorIcon} alt='icon' style={{ marginRight: '15px' }} />
+            <img src='/icons/errorIcon.png' alt='icon' style={{ marginRight: '15px' }} />
             <strong>Произошла ошибка!</strong>
           </div>
           <span style={{ marginLeft: '39px' }}>{alertMsg}</span>

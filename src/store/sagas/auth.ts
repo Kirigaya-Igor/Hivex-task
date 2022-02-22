@@ -30,7 +30,6 @@ export function* authenticateSaga({ payload }) {
         document.cookie = `sendsay_session=${api.sendsay.session}`;
       });
   } catch (e) {
-    console.log('err', e);
     document.cookie = '';
     yield put(
       showAlert({
