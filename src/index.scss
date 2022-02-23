@@ -31,3 +31,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.git-hub-link {
+  color: #999999;
+  text-decoration: none;
+  margin-top: 20px;
+
+  &:hover {
+    color: black;
+  }
+}

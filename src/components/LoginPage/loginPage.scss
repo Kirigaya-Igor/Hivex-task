@@ -1,15 +1,15 @@
-.loginPage {
+.login-page {
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 
-    .logo {
+    &__logo {
         margin-bottom: 20px;
     }
 
-    .customForm {
+    &__customForm {
         width: 520px;
         min-height: 425px;
         left: calc(50% - 520px / 2);
@@ -19,13 +19,13 @@
         border-radius: 5px;
         padding: 40px 30px;
 
-        .title {
+        .login-page__title {
             font-size: 24px;
             line-height: 30px;
             margin-bottom: 20px;
         }
 
-        .submitButton {
+        .login-page__submit-button {
             background: linear-gradient(180deg, #45A6FF 0%, #0055FB 100%), #C4C4C4;
             border-radius: 5px;
             min-height: 40px;
@@ -54,7 +54,7 @@
             }
         }
 
-        .loadingButton {
+        .login-page__loading-button {
             background: linear-gradient(180deg, #45A6FF 0%, #0055FB 100%), #C4C4C4;
             border-radius: 5px;
             min-height: 40px;
@@ -62,11 +62,5 @@
             border: none;
             color: #ffffff;
         }
-    }
-
-    .customLink {
-        color: #999999;
-        text-decoration: none;
-        margin-top: 20px;
     }
 }

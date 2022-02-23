@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, withRouter } from 'react-router-dom';
-
-import { authenticate } from '@actions/auth';
+import { authenticate } from '@toolkitSlice/toolkitSlice';
 import { Form, Formik } from 'formik';
-import { CustomField } from '../common/customField';
+import { CustomField } from '@components/common/customField';
 import './loginPage.scss';
-import { Alert } from '../alert/alert';
+import { Alert } from '@components/alert/alert';
 
 interface MyFormValues {
   login: string;
@@ -62,8 +61,8 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className='loginPage'>
-      <img src='/icons/logo.svg' alt='' className='logo' />
+    <div className='login-page'>
+      <img src='/icons/logo.svg' alt='' className='login-page__logo' />
       <Formik
         initialValues={initialValues}
         validate={validate}
@@ -76,8 +75,8 @@ const LoginPage: React.FC = () => {
           <div className='container-fluid'>
             <div className='row d-flex justify-content-center'>
               <div className='col d-flex justify-content-center'>
-                <Form className='customForm'>
-                  <h3 className='title'>API-консолька</h3>
+                <Form className='login-page__customForm'>
+                  <h3 className='login-page__title'>API-консолька</h3>
                   <Alert />
                   <CustomField
                     itemId='Login'
@@ -112,11 +111,11 @@ const LoginPage: React.FC = () => {
                   />
                   <div className=''>
                     {loading ? (
-                      <button className='loadingButton' type='submit' disabled>
+                      <button className='login-page__loading-button' type='submit' disabled>
                         <span className='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>
                       </button>
                     ) : (
-                      <button type='submit' disabled={!isValid || !dirty} className='submitButton'>
+                      <button type='submit' disabled={!isValid || !dirty} className='login-page__submit-button'>
                         Войти
                       </button>
                     )}
@@ -127,7 +126,7 @@ const LoginPage: React.FC = () => {
           </div>
         )}
       </Formik>
-      <a href='https://github.com/Kirigaya-Igor' target='_blank' className='customLink' rel='noreferrer'>
+      <a href='https://github.com/Kirigaya-Igor' target='_blank' className='git-hub-link' rel='noreferrer'>
         @Мой GitHub
       </a>
     </div>

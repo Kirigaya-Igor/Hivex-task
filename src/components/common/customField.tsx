@@ -29,11 +29,11 @@ export const CustomField: React.FC<CustomFieldPropsType> = ({
   component,
 }) => {
   return (
-    <div className='inputBlock'>
+    <div className='input-block'>
       {itemLabel && (
-        <label htmlFor={itemId} className='label'>
+        <label htmlFor={itemId} className='input-block__label'>
           <span>
-            {itemLabel} {important ? <span className='redText'>*</span> : ''}
+            {itemLabel} {important ? <span className='input-block__redText'>*</span> : ''}
           </span>
           {helpLabel ? <span>{helpLabel}</span> : ''}
         </label>
@@ -41,7 +41,7 @@ export const CustomField: React.FC<CustomFieldPropsType> = ({
       <ErrorMessage name={itemName} component={TextError} />
       <Field
         disabled={loading && true}
-        className='customField'
+        className='input-block__customField'
         id={itemId}
         placeholder={placeholder}
         type={itemType}

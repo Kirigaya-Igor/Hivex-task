@@ -1,4 +1,5 @@
 {
+  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "target": "es5",
     "lib": [
@@ -18,14 +19,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "baseUrl": "./",
-    "paths": {
-      "@actions/*": ["src/store/actions/*"],
-      "@reducers/*": ["src/store/reducers/*"],
-      "@sagas/*": ["src/store/sagas/*"],
-      "@constans/*": ["src/store/constans/*"]
-    }
+    "jsx": "react-jsx"
   },
   "include": [
     "src",

@@ -1,12 +1,6 @@
-const { alias } = require('react-app-rewire-alias');
+const { alias, configPaths, aliasJest } = require('react-app-rewire-alias');
 
-module.exports = function override(config) {
-  alias({
-    '@actions': 'src/store/actions',
-    '@reducers': 'src/store/reducers',
-    '@sagas': 'src/store/sagas',
-    '@constans': 'src/store/constans',
-  })(config);
+const aliasMap = configPaths('./tsconfig.paths.json');
 
-  return config;
-};
+module.exports = alias(aliasMap);
+module.exports.jest = aliasJest(aliasMap);

@@ -1,4 +1,4 @@
-import { logout } from '@actions/auth';
+import { logout } from '@toolkitSlice/toolkitSlice';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -36,7 +36,7 @@ export const ConsoleHeader = () => {
   }
 
   return (
-    <nav className='navbar navbar-expand-lg navbar-light bg-light customHeader'>
+    <nav className='navbar navbar-expand-lg navbar-light bg-light console-header'>
       <div className='container-fluid'>
         <img src='/icons/logo.svg' alt='' className='navbar-brand' />
         <button
@@ -52,13 +52,13 @@ export const ConsoleHeader = () => {
         </button>
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <div className='d-flex justify-content-between flex-column flex-lg-row w-100' style={{ paddingRight: '30px' }}>
-            <span className='title'>API-консолька</span>
+            <span className='console-header__title'>API-консолька</span>
 
             <div className='d-flex justify-content-between align-items-lg-center flex-column flex-lg-row'>
-              <div className='loginBlock'>{`${login} ${sublogin ? `: ${sublogin}` : ''}`}</div>
+              <div className='console-header__loginBlock'>{`${login} ${sublogin ? `: ${sublogin}` : ''}`}</div>
 
               <div>
-                <button onClick={clickLogout} type='button' className='logoutButton'>
+                <button onClick={clickLogout} type='button' className='console-header__logoutButton'>
                   Выйти
                   <img src='/icons/log-out.svg' alt='logout' style={{ marginLeft: '10px' }} />
                 </button>
@@ -69,7 +69,7 @@ export const ConsoleHeader = () => {
                   onClick={toggleFullScreen}
                   src={`${fullScreen ? '/icons/small-screen.svg' : '/icons/full-screen.svg'}`}
                   alt='fullScreen'
-                  className='screenSize'
+                  className='console-header__screenSize'
                 />
               </div>
             </div>

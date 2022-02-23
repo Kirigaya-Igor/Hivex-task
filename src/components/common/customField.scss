@@ -1,11 +1,11 @@
-.inputBlock {
+.input-block {
   margin-bottom: 20px;
 
-  .redText {
+  &__redText {
     color: red;
   }
     
-  .label {
+  &__label {
     color: black;
     font-size: 16px;
     line-height: 20px;
@@ -13,7 +13,7 @@
     justify-content: space-between;
   }
     
-  .customField {
+  &__customField {
     background: #FFFFFF;
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-sizing: border-box;

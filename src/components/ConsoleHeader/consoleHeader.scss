@@ -1,11 +1,11 @@
-.customHeader {
+.console-header {
 
-    .title {
+    &__title {
         font-size: 20px;
         line-height: 30px;
     }
 
-    .loginBlock {
+    &__loginBlock {
         border: 1px solid rgba(0, 0, 0, 0.2);
         box-sizing: border-box;
         border-radius: 5px;
@@ -17,7 +17,7 @@
         }
     }
 
-    .logoutButton {
+    &__logoutButton {
         border: none;
         margin: 0px 50px;
         padding: 5px 15px;
@@ -30,7 +30,7 @@
         }
     }
 
-    .screenSize {
+    &__screenSize {
         
         @media screen and (max-width: 992px) {
             margin-top: 10px;
