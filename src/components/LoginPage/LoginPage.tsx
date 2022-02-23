@@ -71,7 +71,7 @@ const LoginPage: React.FC = () => {
           resetForm({});
         }}
       >
-        {({ isValid, errors, dirty, ...props }) => (
+        {({ isValid, errors, dirty }) => (
           <div className='container-fluid'>
             <div className='row d-flex justify-content-center'>
               <div className='col d-flex justify-content-center'>

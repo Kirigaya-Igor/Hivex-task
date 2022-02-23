@@ -36,7 +36,7 @@ export const ConsoleHeader = () => {
   }
 
   return (
-    <nav className='navbar navbar-expand-lg navbar-light bg-light console-header'>
+    <nav className='navbar navbar-expand-lg navbar-light console-header'>
       <div className='container-fluid'>
         <img src='/icons/logo.svg' alt='' className='navbar-brand' />
         <button
