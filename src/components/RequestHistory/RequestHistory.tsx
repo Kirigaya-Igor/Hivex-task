@@ -48,7 +48,9 @@ export const RequestHistory: React.FC = () => {
         <div className='history-gradient'></div>
       </div>
       <div className='clear-history'>
-        <img src='/icons/cross.svg' alt='clear' />
+        <button style={{ border: 'none', backgroundColor: 'transparent' }}>
+          <img src='/icons/cross.svg' alt='clear' />
+        </button>
       </div>
     </div>
   );

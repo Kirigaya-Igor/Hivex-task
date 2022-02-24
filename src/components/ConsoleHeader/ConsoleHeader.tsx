@@ -66,9 +66,9 @@ export const ConsoleHeader = () => {
                 </button>
               </div>
 
-              <div onClick={toggleFullScreen} className='console-header__screenSize'>
+              <button onClick={toggleFullScreen} className='console-header__screenSize'>
                 {fullScreen ? <SmallScreen /> : <FullllScreen />}
-              </div>
+              </button>
             </div>
           </div>
         </div>

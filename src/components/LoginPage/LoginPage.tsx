@@ -109,13 +109,13 @@ const LoginPage: React.FC = () => {
                     errors={errors}
                     loading={loading}
                   />
-                  <div className=''>
+                  <div>
                     {loading ? (
-                      <button className='login-page__loading-button' type='submit' disabled>
+                      <button className='loading-button' type='submit' disabled>
                         <span className='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>
                       </button>
                     ) : (
-                      <button type='submit' disabled={!isValid || !dirty} className='login-page__submit-button'>
+                      <button type='submit' disabled={!isValid || !dirty} className='submit-button'>
                         Войти
                       </button>
                     )}
@@ -126,7 +126,7 @@ const LoginPage: React.FC = () => {
           </div>
         )}
       </Formik>
-      <a href='https://github.com/Kirigaya-Igor' target='_blank' className='git-hub-link' rel='noreferrer'>
+      <a href='https://github.com/Kirigaya-Igor' target='_blank' className='git-hub-link' rel='noreferrer' style={{ marginTop: '20px' }}>
         @Мой GitHub
       </a>
     </div>
