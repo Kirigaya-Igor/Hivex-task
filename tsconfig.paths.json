@@ -8,7 +8,8 @@
         "@reducers/*": ["src/store/reducers/*"],
         "@sagas/*": ["src/store/sagas/*"],
         "@constans/*": ["src/store/constans/*"],
-        "@components/*": ["src/components/*"]
+        "@components/*": ["src/components/*"],
+        "@icons/*": ["public/icons/*"]
       }
     }
   }

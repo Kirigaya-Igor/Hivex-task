@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './consoleHeader.scss';
+import { ReactComponent as SmallScreen } from '@icons/small-screen.svg';
+import { ReactComponent as FullllScreen } from '@icons/full-screen.svg';
 
 export const ConsoleHeader = () => {
   //@ts-ignore
@@ -64,13 +66,8 @@ export const ConsoleHeader = () => {
                 </button>
               </div>
 
-              <div>
-                <img
-                  onClick={toggleFullScreen}
-                  src={`${fullScreen ? '/icons/small-screen.svg' : '/icons/full-screen.svg'}`}
-                  alt='fullScreen'
-                  className='console-header__screenSize'
-                />
+              <div onClick={toggleFullScreen} className='console-header__screenSize'>
+                {fullScreen ? <SmallScreen /> : <FullllScreen />}
               </div>
             </div>
           </div>

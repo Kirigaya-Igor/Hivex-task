@@ -32,9 +32,22 @@
     }
 
     &__screenSize {
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        border: 2px solid rgba(69, 165, 255, 0);
+        border-radius: 7px;
         
         @media screen and (max-width: 992px) {
             margin-top: 10px;
+        }
+
+        &:hover * {
+            stroke: #0055FB;
+        }
+
+        &:active {
+            border: 2px solid rgba(69, 165, 255, 0.5);
         }
     }
 }
