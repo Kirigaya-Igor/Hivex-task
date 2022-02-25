@@ -10,7 +10,10 @@ export const ConsoleBody = () => {
   const [panelsSize, setPanelsSize] = useState([50, 50]);
 
   const [request, setRequest] = useState('');
-  const [response, setResponse] = useState('response');
+  const [requestErr, setRequestErr] = useState(false);
+
+  const [response, setResponse] = useState('Отет сервера');
+  const [responseErr, setResponseErr] = useState(false);
 
   const dragEnd = () => {
     //@ts-ignore
@@ -30,25 +33,50 @@ export const ConsoleBody = () => {
   }, []);
 
   const formatRequest = () => {
-    console.log(JSON.stringify(request));
+    try {
+      console.log(JSON.parse(request));
+      console.log(JSON.stringify(JSON.parse(request), null, 2));
+      setRequest(JSON.stringify(JSON.parse(request), null, 2));
+      setRequestErr(false);
+    } catch (e) {
+      console.log(e);
+      setRequestErr(true);
+    }
+
+    // { "test": "5", "hello": "hello", "arr": [{"num": "5", "text": "test"}], "obj": {"test": "hi"} }
+    // const str = '{ test: 5, hello: "hello", arr: [{num: 5, text: "test"}], obj: {test: "hi"} }';
+
+    // const reg = /,/;
+    // const reg1 = /^.|.$/g;
+
+    // const res = str.split(reg);
+    // const res1 = str.replace(reg1, '');
+
+    // console.log(res1);
   };
 
   return (
     <div className='console-body'>
       <Split className='console-body__panels' minSize={400} gutterSize={15} sizes={panelsSize} onDragEnd={dragEnd}>
         <div className='console-body__panel-block' ref={refLeft}>
-          <div className='console-body__title'>Запрос:</div>
-          <div className='console-body__panel'>
-            <textarea className='console-body__textarea' value={request} onChange={e => setRequest(e.target.value)}>
-              test1
-            </textarea>
+          <div className={`console-body__title ${requestErr ? 'console-body__title-err' : ''}`}>
+            <span>Запрос:</span>
+            {requestErr && <span>{`Пример: { "action": "pong" }`}</span>}
+          </div>
+          <div className={`console-body__panel ${requestErr ? 'console-body__panel-err' : ''}`}>
+            <textarea
+              className='console-body__textarea'
+              placeholder='Введите запрос в JSON формате'
+              value={request}
+              onChange={e => setRequest(e.target.value)}
+            ></textarea>
           </div>
         </div>
 
         <div className='console-body__panel-block'>
-          <div className='console-body__title'>Ответ:</div>
-          <div className='console-body__panel' style={{ padding: '10px' }}>
-            {response}
+          <div className={`console-body__title ${responseErr ? 'console-body__title-err' : ''}`}>Ответ:</div>
+          <div className={`console-body__panel ${responseErr ? 'console-body__panel-err' : ''}`}>
+            <textarea className='console-body__textarea' placeholder='Отет сервера' disabled value={response}></textarea>
           </div>
         </div>
       </Split>

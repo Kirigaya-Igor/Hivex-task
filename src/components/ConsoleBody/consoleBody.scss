@@ -10,8 +10,14 @@
         overflow: auto;
     }
 
-    &____title {
+    &__title {
         height: 25px;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    &__title-err {
+        color: red;
     }
 
     &__panel-block {
@@ -26,6 +32,10 @@
         box-sizing: border-box;
         border-radius: 5px;
         margin-top: 5px;
+    }
+
+    &__panel-err {
+        border: 1px solid red;
     }
 
     &__textarea {
