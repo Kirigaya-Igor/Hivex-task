@@ -8,23 +8,34 @@
         padding: 15px 15px 20px 15px;
         display: flex;
         overflow: auto;
-        align-items: center;
     }
 
     &____title {
         height: 25px;
     }
 
-    &__panel {
+    &__panel-block {
         min-width: 400px;
         min-height: 400px;
+    }
+
+    &__panel {
         height: calc(100% - 25px);
         background: #FFFFFF;
         border: 1px solid rgba(0, 0, 0, 0.2);
         box-sizing: border-box;
         border-radius: 5px;
-        padding: 10px;
         margin-top: 5px;
+    }
+
+    &__textarea {
+        margin: 0;
+        padding: 10px;
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 5px;
+        resize: none;
     }
 
     &__footer {
@@ -70,15 +81,6 @@
     background-repeat: no-repeat;
     cursor: col-resize;
     background-position: 50%;
-    width: 20px;
+    min-width: 15px;
     height: 100%;
-    background-color: pink;
-}
-
-#Resizable{
-    min-width: 400px;
-    min-height: 400px;
-    height: 100%;
-    // width: calc(50% - 10px);
-    // width: 62%;
 }
