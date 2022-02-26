@@ -1,5 +1,5 @@
 import { ReactComponent as FormatIcon } from '@icons/format.svg';
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Split from 'react-split';
 import './consoleBody.scss';
 
@@ -37,6 +37,7 @@ export const ConsoleBody = () => {
       console.log(JSON.parse(request));
       console.log(JSON.stringify(JSON.parse(request), null, 2));
       setRequest(JSON.stringify(JSON.parse(request), null, 2));
+      setResponse(JSON.stringify(JSON.parse(request), null, 2));
       setRequestErr(false);
     } catch (e) {
       console.log(e);
