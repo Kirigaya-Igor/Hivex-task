@@ -57,7 +57,7 @@ export const ConsoleHeader = () => {
             <span className='console-header__title'>API-консолька</span>
 
             <div className='d-flex justify-content-between align-items-lg-center flex-column flex-lg-row'>
-              <div className='console-header__loginBlock'>{`${login} ${sublogin ? `: ${sublogin}` : ''}`}</div>
+              <button type='button' className='console-header__loginBlock'>{`${login} ${sublogin ? `: ${sublogin}` : ''}`}</button>
 
               <div>
                 <button onClick={clickLogout} type='button' className='console-header__logoutButton'>

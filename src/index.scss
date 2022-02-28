@@ -34,10 +34,25 @@ code {
 
 .git-hub-link {
   color: #999999;
+  font-size: 20px;
   text-decoration: none;
+  letter-spacing: 3px;
+  font-weight: 400;
 
   &:hover {
-    color: black;
+    color: deeppink;
+    font-weight: 600;
+    animation: git-link 2s 2 alternate;
+  }
+
+  @keyframes git-link {
+    0%{
+    }
+    100%{
+      letter-spacing: 15px;
+      font-weight: 800;
+      color: cyan;
+    }
   }
 }
 

@@ -2,8 +2,13 @@ import { ReactComponent as FormatIcon } from '@icons/format.svg';
 import React, { useEffect, useRef, useState } from 'react';
 import Split from 'react-split';
 import './consoleBody.scss';
+import api from '@helpers/sendsay';
+import { RequestHistory } from '@components/RequestHistory/RequestHistory';
+import { addRequestHistory } from '@store/toolkitSlice/toolkitSlice';
+import { useDispatch } from 'react-redux';
 
 export const ConsoleBody = () => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
   const refLeft = useRef(null);
@@ -32,32 +37,68 @@ export const ConsoleBody = () => {
     }
   }, []);
 
-  const formatRequest = () => {
+  const formatRequest = (request: string) => {
     try {
-      console.log(JSON.parse(request));
-      console.log(JSON.stringify(JSON.parse(request), null, 2));
       setRequest(JSON.stringify(JSON.parse(request), null, 2));
-      setResponse(JSON.stringify(JSON.parse(request), null, 2));
       setRequestErr(false);
     } catch (e) {
-      console.log(e);
       setRequestErr(true);
     }
+  };
 
-    // { "test": "5", "hello": "hello", "arr": [{"num": "5", "text": "test"}], "obj": {"test": "hi"} }
-    // const str = '{ test: 5, hello: "hello", arr: [{num: 5, text: "test"}], obj: {test: "hi"} }';
+  const addHIstoryItem = (isSuccess: boolean, request: string) => {
+    const obj = JSON.parse(request);
+    const item = {
+      id: obj.action + Date.now(),
+      title: obj.action,
+      body: request,
+      isCopied: false,
+      isSuccess,
+    };
 
-    // const reg = /,/;
-    // const reg1 = /^.|.$/g;
+    dispatch(addRequestHistory(item));
+  };
 
-    // const res = str.split(reg);
-    // const res1 = str.replace(reg1, '');
+  // { "action": "sys.settings.get", "list": ["about.id"]}
 
-    // console.log(res1);
+  const sendRequest = async (request: string) => {
+    formatRequest(request);
+    setLoading(true);
+    try {
+      if (JSON.parse(request)) {
+        await api.sendsay
+          .request(JSON.parse(request))
+          //@ts-ignore
+          .then(res => {
+            setResponse(JSON.stringify(res, null, 2));
+            setResponseErr(false);
+            setLoading(false);
+            addHIstoryItem(true, request);
+            console.log('success');
+          })
+          //@ts-ignore
+          .catch(err => {
+            setResponseErr(true);
+            setResponse(JSON.stringify(err, null, 2));
+            setLoading(false);
+            addHIstoryItem(false, request);
+            console.log('error');
+          });
+      }
+    } catch (error) {
+      setLoading(false);
+    }
+  };
+
+  const runHistoryRequest = (item: any) => {
+    sendRequest(item.body);
+    console.log('runHistoryRequest');
+    console.log(item.body);
   };
 
   return (
     <div className='console-body'>
+      <RequestHistory runHistoryRequest={runHistoryRequest} />
       <Split className='console-body__panels' minSize={400} gutterSize={15} sizes={panelsSize} onDragEnd={dragEnd}>
         <div className='console-body__panel-block' ref={refLeft}>
           <div className={`console-body__title ${requestErr ? 'console-body__title-err' : ''}`}>
@@ -70,6 +111,7 @@ export const ConsoleBody = () => {
               placeholder='Введите запрос в JSON формате'
               value={request}
               onChange={e => setRequest(e.target.value)}
+              disabled={loading && true}
             ></textarea>
           </div>
         </div>
@@ -90,7 +132,7 @@ export const ConsoleBody = () => {
                 <span className='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>
               </button>
             ) : (
-              <button type='submit' className='submit-button'>
+              <button type='submit' className='submit-button' onClick={() => sendRequest(request)}>
                 Отправить
               </button>
             )}
@@ -102,7 +144,7 @@ export const ConsoleBody = () => {
           </a>
         </div>
         <div className='col-12 col-sm-5 col-md-4 d-flex justify-content-sm-end mt-3 mt-sm-0'>
-          <button type='submit' className='console-body__format-button' onClick={formatRequest}>
+          <button type='submit' className='console-body__format-button' onClick={() => formatRequest(request)}>
             <FormatIcon style={{ marginRight: '10px' }} />
             Форматировать
           </button>

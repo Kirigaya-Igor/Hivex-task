@@ -1,8 +1,7 @@
 import { all, put, call, takeLatest } from 'redux-saga/effects';
-import api from '../../helpers/sendsay';
+import api from '@helpers/sendsay';
 
-import { ActionTypes } from '../constants';
-import { authenticate, authenticateSuccess, authenticateFailure, showAlert, logout } from '@toolkitSlice/toolkitSlice';
+import { authenticate, authenticateSuccess, authenticateFailure, showAlert, logout, authenticateCheck } from '@toolkitSlice/toolkitSlice';
 
 export function* authenticateCheckSaga() {
   console.log('authenticateCheckSaga');
@@ -61,7 +60,7 @@ export default function* root() {
   yield all([
     //@ts-ignore
     takeLatest(authenticate, authenticateSaga),
-    takeLatest(ActionTypes.AUTHENTICATE_CHECK, authenticateCheckSaga),
+    takeLatest(authenticateCheck, authenticateCheckSaga),
     takeLatest(logout, logoutSaga),
   ]);
 }

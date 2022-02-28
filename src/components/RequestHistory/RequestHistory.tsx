@@ -1,23 +1,18 @@
-import React, { useState } from 'react';
+import { clearRequestHistory, copyRequestHistory, removeRequestHistory, requestHistoryArrType } from '@store/toolkitSlice/toolkitSlice';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './requestHistory.scss';
 
-export const RequestHistory: React.FC = () => {
-  const [testArr, setTestArr] = useState([
-    { id: 1, title: 'test1', isCopied: false, isSuccess: false },
-    { id: 2, title: 'test2', isCopied: false, isSuccess: true },
-    { id: 3, title: 'test3', isCopied: false, isSuccess: false },
-    { id: 5, title: 'test4', isCopied: false, isSuccess: true },
-    { id: 6, title: 'test5', isCopied: false, isSuccess: true },
-    { id: 7, title: 'test6', isCopied: false, isSuccess: true },
-    { id: 8, title: 'test7', isCopied: false, isSuccess: true },
-    { id: 9, title: 'test8', isCopied: false, isSuccess: true },
-    { id: 10, title: 'test9', isCopied: false, isSuccess: true },
-    { id: 11, title: 'test10', isCopied: false, isSuccess: true },
-    { id: 12, title: 'test11', isCopied: false, isSuccess: true },
-    { id: 13, title: 'test12', isCopied: false, isSuccess: true },
-    { id: 14, title: 'test13', isCopied: false, isSuccess: true },
-    { id: 15, title: 'test14', isCopied: false, isSuccess: true },
-  ]);
+type RequestHistoryType = {
+  runHistoryRequest: (item: requestHistoryArrType) => void;
+};
+
+export const RequestHistory: React.FC<RequestHistoryType> = ({ runHistoryRequest }) => {
+  const dispatch = useDispatch();
+  //@ts-ignore
+  const requestHistoryArr: Array<requestHistoryArrType> = useSelector(state => state.auth.requestHistoryArr);
+
+  console.log(requestHistoryArr);
 
   const onWheel = (e: React.WheelEvent<HTMLDivElement>) => {
     e.currentTarget.scrollTo({
@@ -30,19 +25,27 @@ export const RequestHistory: React.FC = () => {
     const theClipboard = navigator.clipboard;
 
     try {
-      theClipboard.writeText(item.title);
-      setTestArr(testArr.map(el => (el.id == item.id ? { ...el, isCopied: true } : el)));
+      theClipboard.writeText(item.body);
+      dispatch(copyRequestHistory({ ...item, isCopied: true }));
 
-      setTimeout(() => setTestArr(testArr.map(el => (el.id == item.id ? { ...el, isCopied: false } : el))), 1000);
+      setTimeout(() => dispatch(copyRequestHistory({ ...item, isCopied: false })), 1000);
     } catch (err) {
       console.error('Failed to copy!', err);
     }
   };
 
+  const removeHistoryItem = (item: any) => {
+    dispatch(removeRequestHistory(item));
+  };
+
+  const clearHistory = () => {
+    dispatch(clearRequestHistory());
+  };
+
   return (
     <div className='d-flex'>
       <div className='request-history' onWheel={onWheel}>
-        {testArr.map((item, index) => (
+        {requestHistoryArr.map((item, index) => (
           <div key={index}>
             <button className='request-history__item' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
               <img src={`${item.isSuccess ? '/icons/good-request.svg' : '/icons/bad-request.svg'}`} alt='logout' />
@@ -54,7 +57,11 @@ export const RequestHistory: React.FC = () => {
             </button>
             <ul className='dropdown-menu'>
               <li>
-                <button className='custom__dropdown__item custom__dropdown__item__standart' type='button'>
+                <button
+                  className='custom__dropdown__item custom__dropdown__item__standart'
+                  type='button'
+                  onClick={() => runHistoryRequest(item)}
+                >
                   Выполнить
                 </button>
               </li>
@@ -67,7 +74,11 @@ export const RequestHistory: React.FC = () => {
                 <hr className='dropdown-divider' />
               </li>
               <li>
-                <button className='custom__dropdown__item custom__dropdown__item__delete' type='button'>
+                <button
+                  className='custom__dropdown__item custom__dropdown__item__delete'
+                  type='button'
+                  onClick={() => removeHistoryItem(item)}
+                >
                   Удалить
                 </button>
               </li>
@@ -78,7 +89,7 @@ export const RequestHistory: React.FC = () => {
         <div className='history-gradient'></div>
       </div>
       <div className='clear-history'>
-        <button style={{ border: 'none', backgroundColor: 'transparent' }}>
+        <button style={{ border: 'none', backgroundColor: 'transparent' }} onClick={clearHistory}>
           <img src='/icons/cross.svg' alt='clear' />
         </button>
       </div>
