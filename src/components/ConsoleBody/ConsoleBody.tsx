@@ -4,7 +4,7 @@ import Split from 'react-split';
 import './consoleBody.scss';
 import api from '@helpers/sendsay';
 import { RequestHistory } from '@components/RequestHistory/RequestHistory';
-import { addRequestHistory } from '@store/toolkitSlice/toolkitSlice';
+import { addRequestHistory, requestHistoryArrType } from '@store/toolkitSlice/toolkitSlice';
 import { useDispatch } from 'react-redux';
 
 export const ConsoleBody = () => {
@@ -90,7 +90,7 @@ export const ConsoleBody = () => {
     }
   };
 
-  const runHistoryRequest = (item: any) => {
+  const runHistoryRequest = (item: requestHistoryArrType) => {
     sendRequest(item.body);
     console.log('runHistoryRequest');
     console.log(item.body);

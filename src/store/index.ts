@@ -41,3 +41,5 @@ store.runSagaTask();
 
 //@ts-ignore
 export const persistor = persistStore(store);
+
+export type RootStateType = ReturnType<typeof store.getState>;

@@ -6,6 +6,7 @@ import { Form, Formik } from 'formik';
 import { CustomField } from '@components/common/customField';
 import './loginPage.scss';
 import { Alert } from '@components/alert/alert';
+import { RootStateType } from '@store/index';
 
 interface MyFormValues {
   login: string;
@@ -16,10 +17,8 @@ interface MyFormValues {
 const LoginPage: React.FC = () => {
   const initialValues: MyFormValues = { login: '', sublogin: '', password: '' };
   const dispatch = useDispatch();
-  //@ts-ignore
-  const loading = useSelector(state => state.auth.loading);
-  //@ts-ignore
-  const isLoggedIn = useSelector(state => !!state.auth.sessionKey?.length);
+  const loading = useSelector((state: RootStateType) => state.auth.loading);
+  const isLoggedIn = useSelector((state: RootStateType) => !!state.auth.sessionKey?.length);
   const history = useHistory();
 
   useEffect(() => {

@@ -8,13 +8,18 @@ export type requestHistoryArrType = {
   isSuccess: boolean;
 };
 
+type alertMessageType = {
+  id: string;
+  explain: string;
+};
+
 type initialStateType = {
   loading: boolean;
   sessionKey: string | null;
   login: string | null;
   sublogin: string | null;
   showAlert: boolean;
-  alertMessage: string | null;
+  alertMessage: alertMessageType | null;
   requestHistoryArr: Array<requestHistoryArrType>;
 };
 

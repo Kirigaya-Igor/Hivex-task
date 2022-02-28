@@ -1,3 +1,4 @@
+import { RootStateType } from '@store/index';
 import { clearRequestHistory, copyRequestHistory, removeRequestHistory, requestHistoryArrType } from '@store/toolkitSlice/toolkitSlice';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,10 +10,7 @@ type RequestHistoryType = {
 
 export const RequestHistory: React.FC<RequestHistoryType> = ({ runHistoryRequest }) => {
   const dispatch = useDispatch();
-  //@ts-ignore
-  const requestHistoryArr: Array<requestHistoryArrType> = useSelector(state => state.auth.requestHistoryArr);
-
-  console.log(requestHistoryArr);
+  const requestHistoryArr: Array<requestHistoryArrType> = useSelector((state: RootStateType) => state.auth.requestHistoryArr);
 
   const onWheel = (e: React.WheelEvent<HTMLDivElement>) => {
     e.currentTarget.scrollTo({
@@ -21,7 +19,7 @@ export const RequestHistory: React.FC<RequestHistoryType> = ({ runHistoryRequest
     });
   };
 
-  const copyRequest = (item: any) => {
+  const copyRequest = (item: requestHistoryArrType) => {
     const theClipboard = navigator.clipboard;
 
     try {
@@ -34,7 +32,7 @@ export const RequestHistory: React.FC<RequestHistoryType> = ({ runHistoryRequest
     }
   };
 
-  const removeHistoryItem = (item: any) => {
+  const removeHistoryItem = (item: requestHistoryArrType) => {
     dispatch(removeRequestHistory(item));
   };
 

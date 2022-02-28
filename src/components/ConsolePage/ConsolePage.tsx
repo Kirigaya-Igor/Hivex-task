@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
-import { ConsoleHeader } from '@components/ConsoleHeader/ConsoleHeader';
-import { RequestHistory } from '@components/RequestHistory/RequestHistory';
 import { ConsoleBody } from '@components/ConsoleBody/ConsoleBody';
-import { useDispatch } from 'react-redux';
+import { ConsoleHeader } from '@components/ConsoleHeader/ConsoleHeader';
 import { authenticateCheck } from '@store/toolkitSlice/toolkitSlice';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 export const ConsolePage: React.FC = () => {
   const dispatch = useDispatch();
@@ -15,8 +14,6 @@ export const ConsolePage: React.FC = () => {
   return (
     <div style={{ height: '100%' }}>
       <ConsoleHeader />
-
-      {/* <RequestHistory /> */}
 
       <ConsoleBody />
     </div>

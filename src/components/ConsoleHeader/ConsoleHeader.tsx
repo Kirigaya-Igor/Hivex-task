@@ -5,14 +5,12 @@ import { useHistory } from 'react-router-dom';
 import './consoleHeader.scss';
 import { ReactComponent as SmallScreen } from '@icons/small-screen.svg';
 import { ReactComponent as FullllScreen } from '@icons/full-screen.svg';
+import { RootStateType } from '@store/index';
 
 export const ConsoleHeader = () => {
-  //@ts-ignore
-  const login = useSelector(state => state.auth.login);
-  //@ts-ignore
-  const sublogin = useSelector(state => state.auth.sublogin);
-  //@ts-ignore
-  const isLoggedIn = useSelector(state => !!state.auth.sessionKey?.length);
+  const login = useSelector((state: RootStateType) => state.auth.login);
+  const sublogin = useSelector((state: RootStateType) => state.auth.sublogin);
+  const isLoggedIn = useSelector((state: RootStateType) => !!state.auth.sessionKey?.length);
   const dispatch = useDispatch();
   const history = useHistory();
   const [fullScreen, setFullScreen] = useState<boolean>(false);

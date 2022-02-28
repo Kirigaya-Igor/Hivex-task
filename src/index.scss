@@ -1,3 +1,8 @@
+$gradient1: #45A6FF;
+$gradient2: #0055FB;
+$white-color: #FFFFFF;
+$light-gray: #C4C4C4;
+
 * {
   box-sizing: border-box;
 }
@@ -57,15 +62,15 @@ code {
 }
 
 .submit-button {
-  background: linear-gradient(180deg, #45A6FF 0%, #0055FB 100%), #C4C4C4;
+  background: linear-gradient(180deg, #45A6FF 0%, #0055FB 100%), $light-gray;
   border-radius: 5px;
   min-height: 40px;
   min-width: 100px;
   border: none;
-  color: #ffffff;
+  color: $white-color;
 
   &:hover {
-      background: linear-gradient(0deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)), linear-gradient(180deg, #45A6FF 0%, #0055FB 100%), #C4C4C4;
+      background: linear-gradient(0deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)), linear-gradient(180deg, $gradient1 0%, $gradient2 100%), $light-gray;
   }
 
   &:focus {
@@ -74,22 +79,22 @@ code {
   }
 
   &:active {
-      background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), linear-gradient(180deg, #45A6FF 0%, #0055FB 100%), #C4C4C4;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), linear-gradient(180deg, $gradient1 0%, $gradient2 100%), $light-gray;
       border-radius: 5px;
       border: none;
       box-shadow: none;
   }
 
   &:disabled {
-      background: linear-gradient(0deg, #C4C4C4, #C4C4C4), linear-gradient(180deg, #45A6FF 0%, #0055FB 100%);
+      background: linear-gradient(0deg, $light-gray, $light-gray), linear-gradient(180deg, $gradient1 0%, $gradient2 100%);
   }
 }
 
 .loading-button {
-  background: linear-gradient(180deg, #45A6FF 0%, #0055FB 100%), #C4C4C4;
+  background: linear-gradient(180deg, $gradient1 0%, $gradient2 100%), $light-gray;
   border-radius: 5px;
   min-height: 40px;
   min-width: 100px;
   border: none;
-  color: #ffffff;
+  color: $white-color;
 }

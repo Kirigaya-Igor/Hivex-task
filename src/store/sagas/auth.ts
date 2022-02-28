@@ -4,7 +4,6 @@ import api from '@helpers/sendsay';
 import { authenticate, authenticateSuccess, authenticateFailure, showAlert, logout, authenticateCheck } from '@toolkitSlice/toolkitSlice';
 
 export function* authenticateCheckSaga() {
-  console.log('authenticateCheckSaga');
   try {
     yield api.sendsay.request({
       action: 'pong',
@@ -17,8 +16,15 @@ export function* authenticateCheckSaga() {
   }
 }
 
-//@ts-ignore
-export function* authenticateSaga({ payload }) {
+type authenticateType = {
+  payload: {
+    login: string;
+    sublogin: string;
+    password: string;
+  };
+};
+
+export function* authenticateSaga({ payload }: authenticateType) {
   try {
     yield api.sendsay
       .login({
@@ -58,7 +64,6 @@ export function* logoutSaga() {
 
 export default function* root() {
   yield all([
-    //@ts-ignore
     takeLatest(authenticate, authenticateSaga),
     takeLatest(authenticateCheck, authenticateCheckSaga),
     takeLatest(logout, logoutSaga),

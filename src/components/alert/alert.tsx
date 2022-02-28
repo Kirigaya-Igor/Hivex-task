@@ -2,15 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './alert.scss';
 import { showAlert } from '@toolkitSlice/toolkitSlice';
+import { RootStateType } from '@store/index';
 
 export const Alert: React.FC = () => {
   const [alertMsg, setAlertMsg] = useState<string>('');
   const dispatch = useDispatch();
-
-  //@ts-ignore
-  const showAlertState = useSelector(state => state.auth.showAlert);
-  //@ts-ignore
-  const alertMessage = useSelector(state => state.auth.alertMessage);
+  const showAlertState = useSelector((state: RootStateType) => state.auth.showAlert);
+  const alertMessage = useSelector((state: RootStateType) => state.auth.alertMessage);
 
   const showAlertFunction = () => {
     alertMessage && setAlertMsg(`{id: ${alertMessage.id}, explain: ${alertMessage.explain}}`);
