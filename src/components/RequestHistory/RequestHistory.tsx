@@ -46,12 +46,12 @@ export const RequestHistory: React.FC<RequestHistoryType> = ({ runHistoryRequest
         {requestHistoryArr.map((item, index) => (
           <div key={index}>
             <button className='request-history__item' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
-              <img src={`${item.isSuccess ? '/icons/good-request.svg' : '/icons/bad-request.svg'}`} alt='logout' />
+              <img src={`${item.isSuccess ? '/icons/good-request.svg' : '/icons/bad-request.svg'}`} alt='circle' />
               <div>
                 <span className='request-history__text'>{item.title}</span>
                 {item.isCopied && <span className='request-history__copy-text'>Скопировано</span>}
               </div>
-              <img src='/icons/dots.svg' alt='logout' />
+              <img src='/icons/dots.svg' alt='dots' />
             </button>
             <ul className='dropdown-menu'>
               <li>

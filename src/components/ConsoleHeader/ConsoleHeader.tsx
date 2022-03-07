@@ -1,25 +1,16 @@
-import { logout } from '@toolkitSlice/toolkitSlice';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import './consoleHeader.scss';
-import { ReactComponent as SmallScreen } from '@icons/small-screen.svg';
 import { ReactComponent as FullllScreen } from '@icons/full-screen.svg';
+import { ReactComponent as SmallScreen } from '@icons/small-screen.svg';
 import { RootStateType } from '@store/index';
+import { logout } from '@toolkitSlice/toolkitSlice';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import './consoleHeader.scss';
 
 export const ConsoleHeader = () => {
   const login = useSelector((state: RootStateType) => state.auth.login);
   const sublogin = useSelector((state: RootStateType) => state.auth.sublogin);
-  const isLoggedIn = useSelector((state: RootStateType) => !!state.auth.sessionKey?.length);
   const dispatch = useDispatch();
-  const history = useHistory();
   const [fullScreen, setFullScreen] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      history.push('/');
-    }
-  }, [isLoggedIn]);
 
   const clickLogout = () => {
     dispatch(logout());
@@ -38,7 +29,7 @@ export const ConsoleHeader = () => {
   return (
     <nav className='navbar navbar-expand-lg navbar-light console-header'>
       <div className='container-fluid'>
-        <img src='/icons/logo.svg' alt='' className='navbar-brand' />
+        <img src='/icons/logo.svg' alt='brand' className='navbar-brand' />
         <button
           className='navbar-toggler'
           type='button'

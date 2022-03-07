@@ -59,8 +59,6 @@ export const ConsoleBody = () => {
     dispatch(addRequestHistory(item));
   };
 
-  // { "action": "sys.settings.get", "list": ["about.id"]}
-
   const sendRequest = async (request: string) => {
     formatRequest(request);
     setLoading(true);
@@ -74,7 +72,6 @@ export const ConsoleBody = () => {
             setResponseErr(false);
             setLoading(false);
             addHIstoryItem(true, request);
-            console.log('success');
           })
           //@ts-ignore
           .catch(err => {
@@ -82,7 +79,6 @@ export const ConsoleBody = () => {
             setResponse(JSON.stringify(err, null, 2));
             setLoading(false);
             addHIstoryItem(false, request);
-            console.log('error');
           });
       }
     } catch (error) {
@@ -92,8 +88,6 @@ export const ConsoleBody = () => {
 
   const runHistoryRequest = (item: requestHistoryArrType) => {
     sendRequest(item.body);
-    console.log('runHistoryRequest');
-    console.log(item.body);
   };
 
   return (

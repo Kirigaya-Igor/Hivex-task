@@ -2,6 +2,7 @@
   "name": "react-sendsay-console",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://kirigaya-igor.github.io/Hivex-task/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.2",
     "@svgr/webpack": "^5.4.0",
@@ -15,6 +16,7 @@
     "add": "^2.0.6",
     "fbjs": "^1.0.0",
     "formik": "^2.2.9",
+    "gh-pages": "^3.2.3",
     "jsoneditor": "^9.0.0",
     "jsoneditor-react": "^3.0.0",
     "prop-types": "^15.7.2",
@@ -42,7 +44,9 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
+    "eject": "react-app-rewired eject",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
