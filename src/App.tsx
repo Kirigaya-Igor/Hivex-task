@@ -1,10 +1,10 @@
-import { ConsolePage } from '@components/ConsolePage/ConsolePage';
-import LoginPage from '@components/LoginPage/LoginPage';
-import { persistor, store } from '@store/index';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
+import { persistor, store } from '@store/index';
+import { ConsolePage } from '@components/ConsolePage/ConsolePage';
+import LoginPage from '@components/LoginPage/LoginPage';
 
 function App() {
   return (

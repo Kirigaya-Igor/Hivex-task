@@ -1,11 +1,21 @@
-import { ReactComponent as FormatIcon } from '@icons/format.svg';
 import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Split from 'react-split';
-import './consoleBody.scss';
+import { addRequestHistory, requestHistoryArrType } from '@store/toolkitSlice/toolkitSlice';
 import api from '@helpers/sendsay';
 import { RequestHistory } from '@components/RequestHistory/RequestHistory';
-import { addRequestHistory, requestHistoryArrType } from '@store/toolkitSlice/toolkitSlice';
-import { useDispatch } from 'react-redux';
+import { ReactComponent as FormatIcon } from '@icons/format.svg';
+import {
+  requestTitle,
+  responseTitle,
+  sendButtonName,
+  gitHubLinkName,
+  formatButtonName,
+  requestErrorPlaceholder,
+  requestPlaceholder,
+  responsePlaceholder,
+} from '@namingList/namingList';
+import './consoleBody.scss';
 
 export const ConsoleBody = () => {
   const dispatch = useDispatch();
@@ -32,9 +42,7 @@ export const ConsoleBody = () => {
 
   useEffect(() => {
     const item = localStorage.getItem('panelsSize');
-    if (item !== null) {
-      setPanelsSize(JSON.parse(item));
-    }
+    item && setPanelsSize(JSON.parse(item));
   }, []);
 
   const formatRequest = (request: string) => {
@@ -96,13 +104,13 @@ export const ConsoleBody = () => {
       <Split className='console-body__panels' minSize={400} gutterSize={15} sizes={panelsSize} onDragEnd={dragEnd}>
         <div className='console-body__panel-block' ref={refLeft}>
           <div className={`console-body__title ${requestErr ? 'console-body__title-err' : ''}`}>
-            <span>Запрос:</span>
-            {requestErr && <span>{`Пример: { "action": "pong" }`}</span>}
+            <span>{requestTitle}</span>
+            {requestErr && <span>{requestErrorPlaceholder}</span>}
           </div>
           <div className={`console-body__panel ${requestErr ? 'console-body__panel-err' : ''}`}>
             <textarea
               className='console-body__textarea'
-              placeholder='Введите запрос в JSON формате'
+              placeholder={requestPlaceholder}
               value={request}
               onChange={e => setRequest(e.target.value)}
               disabled={loading && true}
@@ -111,9 +119,9 @@ export const ConsoleBody = () => {
         </div>
 
         <div className='console-body__panel-block'>
-          <div className={`console-body__title ${responseErr ? 'console-body__title-err' : ''}`}>Ответ:</div>
+          <div className={`console-body__title ${responseErr ? 'console-body__title-err' : ''}`}>{responseTitle}</div>
           <div className={`console-body__panel ${responseErr ? 'console-body__panel-err' : ''}`}>
-            <textarea className='console-body__textarea' placeholder='Отет сервера' disabled value={response}></textarea>
+            <textarea className='console-body__textarea' placeholder={responsePlaceholder} disabled value={response}></textarea>
           </div>
         </div>
       </Split>
@@ -127,20 +135,20 @@ export const ConsoleBody = () => {
               </button>
             ) : (
               <button type='submit' className='submit-button' onClick={() => sendRequest(request)}>
-                Отправить
+                {sendButtonName}
               </button>
             )}
           </div>
         </div>
         <div className='col-12 col-sm-3 col-md-4 d-flex justify-content-sm-center align-items-center mt-3 mt-sm-0'>
           <a href='https://github.com/Kirigaya-Igor' target='_blank' className='git-hub-link' rel='noreferrer'>
-            @Мой GitHub
+            {gitHubLinkName}
           </a>
         </div>
         <div className='col-12 col-sm-5 col-md-4 d-flex justify-content-sm-end mt-3 mt-sm-0'>
           <button type='submit' className='console-body__format-button' onClick={() => formatRequest(request)}>
             <FormatIcon style={{ marginRight: '10px' }} />
-            Форматировать
+            {formatButtonName}
           </button>
         </div>
       </div>

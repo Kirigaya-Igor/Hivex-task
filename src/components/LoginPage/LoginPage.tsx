@@ -1,12 +1,25 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, withRouter } from 'react-router-dom';
-import { authenticate } from '@toolkitSlice/toolkitSlice';
 import { Form, Formik } from 'formik';
-import { CustomField } from '@components/common/customField';
-import './loginPage.scss';
-import { Alert } from '@components/alert/alert';
 import { RootStateType } from '@store/index';
+import { authenticate } from '@toolkitSlice/toolkitSlice';
+import { CustomField } from '@components/common/customField';
+import { Alert } from '@components/alert/alert';
+import Logo from '@icons/logo.svg';
+import {
+  loginButtonName,
+  gitHubLinkName,
+  errorRequiredField,
+  errorEmail,
+  errorPassword,
+  appTitle,
+  loginPlaceholder,
+  subloginPlaceholder,
+  optionalFieldName,
+  passwordPlaceholder,
+} from '@namingList/namingList';
+import './loginPage.scss';
 
 interface MyFormValues {
   login: string;
@@ -22,9 +35,7 @@ const LoginPage: React.FC = () => {
   const history = useHistory();
 
   useEffect(() => {
-    if (isLoggedIn) {
-      history.push('/console');
-    }
+    isLoggedIn && history.push('/console');
   }, [isLoggedIn]);
 
   const doLogin = (login: string, sublogin: string, password: string) => {
@@ -45,23 +56,22 @@ const LoginPage: React.FC = () => {
     const errors: MyFormValues = {} as MyFormValues;
 
     if (!values.login) {
-      errors.login = 'Обязательное поле';
+      errors.login = errorRequiredField;
     } else if (!/^[\w@.-]{3,}$/i.test(values.login)) {
-      errors.login = 'Не правильный email';
+      errors.login = errorEmail;
     }
 
     if (!values.password) {
-      errors.password = 'Обязательное поле';
+      errors.password = errorRequiredField;
     } else if (!/^(?=.*[\w])[\w\s!@#$%^&*-]{6,}$/i.test(values.password)) {
-      errors.password =
-        'Пароль должен состоять из минимум 6 символов(спец. символы не обязательны): a-z, A-Z, 0-9, !, @, #, $, %, ^, &, *, _, - ';
+      errors.password = errorPassword;
     }
     return errors;
   };
 
   return (
     <div className='login-page'>
-      <img src='/icons/logo.svg' alt='' className='login-page__logo' />
+      <img src={Logo} alt='' className='login-page__logo' />
       <Formik
         initialValues={initialValues}
         validate={validate}
@@ -75,12 +85,12 @@ const LoginPage: React.FC = () => {
             <div className='row d-flex justify-content-center'>
               <div className='col d-flex justify-content-center'>
                 <Form className='login-page__customForm'>
-                  <h3 className='login-page__title'>API-консолька</h3>
+                  <h3 className='login-page__title'>{appTitle}</h3>
                   <Alert />
                   <CustomField
                     itemId='Login'
-                    placeholder='Логин'
-                    itemLabel='Логин'
+                    placeholder={loginPlaceholder}
+                    itemLabel={loginPlaceholder}
                     itemType='text'
                     itemName='login'
                     important={true}
@@ -89,9 +99,9 @@ const LoginPage: React.FC = () => {
                   />
                   <CustomField
                     itemId='SubLogin'
-                    placeholder='Сублогин'
-                    itemLabel='Сублогин'
-                    helpLabel='Опционально'
+                    placeholder={subloginPlaceholder}
+                    itemLabel={subloginPlaceholder}
+                    helpLabel={optionalFieldName}
                     itemType='text'
                     itemName='sublogin'
                     important={false}
@@ -100,8 +110,8 @@ const LoginPage: React.FC = () => {
                   />
                   <CustomField
                     itemId='Password'
-                    placeholder='Пароль'
-                    itemLabel='Пароль'
+                    placeholder={passwordPlaceholder}
+                    itemLabel={passwordPlaceholder}
                     itemType='password'
                     itemName='password'
                     important={true}
@@ -115,7 +125,7 @@ const LoginPage: React.FC = () => {
                       </button>
                     ) : (
                       <button type='submit' disabled={!isValid || !dirty} className='submit-button'>
-                        Войти
+                        {loginButtonName}
                       </button>
                     )}
                   </div>
@@ -126,7 +136,7 @@ const LoginPage: React.FC = () => {
         )}
       </Formik>
       <a href='https://github.com/Kirigaya-Igor' target='_blank' className='git-hub-link' rel='noreferrer' style={{ marginTop: '20px' }}>
-        @Мой GitHub
+        {gitHubLinkName}
       </a>
     </div>
   );

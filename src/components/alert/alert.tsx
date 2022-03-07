@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './alert.scss';
-import { showAlert } from '@toolkitSlice/toolkitSlice';
 import { RootStateType } from '@store/index';
+import { showAlert } from '@toolkitSlice/toolkitSlice';
+import { alertErrorTitle } from '@namingList/namingList';
+import './alert.scss';
 
 export const Alert: React.FC = () => {
   const [alertMsg, setAlertMsg] = useState<string>('');
@@ -43,7 +44,7 @@ export const Alert: React.FC = () => {
           <div className='customAlert__warning'>
             <div className='d-flex align-items-center'>
               <img src='/icons/errorIcon.png' alt='icon' style={{ marginRight: '15px' }} />
-              <strong>Произошла ошибка!</strong>
+              <strong>{alertErrorTitle}</strong>
             </div>
             <span className='customAlert__message'>{alertMsg}</span>
             <button onClick={hideAlert} type='button' className='customAlert__close-btn' aria-label='Close'></button>

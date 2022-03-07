@@ -1,8 +1,13 @@
-import { RootStateType } from '@store/index';
-import { clearRequestHistory, copyRequestHistory, removeRequestHistory, requestHistoryArrType } from '@store/toolkitSlice/toolkitSlice';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootStateType } from '@store/index';
+import { clearRequestHistory, copyRequestHistory, removeRequestHistory, requestHistoryArrType } from '@store/toolkitSlice/toolkitSlice';
+import GoodRequest from '@icons/good-request.svg';
+import BadRequest from '@icons/bad-request.svg';
+import Clear from '@icons/cross.svg';
+import Dots from '@icons/dots.svg';
 import './requestHistory.scss';
+import { copySelectItem, deleteSelectItem, doSelectItem, itemCoped } from '@namingList/namingList';
 
 type RequestHistoryType = {
   runHistoryRequest: (item: requestHistoryArrType) => void;
@@ -46,12 +51,12 @@ export const RequestHistory: React.FC<RequestHistoryType> = ({ runHistoryRequest
         {requestHistoryArr.map((item, index) => (
           <div key={index}>
             <button className='request-history__item' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
-              <img src={`${item.isSuccess ? '/icons/good-request.svg' : '/icons/bad-request.svg'}`} alt='circle' />
+              <img src={`${item.isSuccess ? GoodRequest : BadRequest}`} alt='circle' />
               <div>
                 <span className='request-history__text'>{item.title}</span>
-                {item.isCopied && <span className='request-history__copy-text'>Скопировано</span>}
+                {item.isCopied && <span className='request-history__copy-text'>{itemCoped}</span>}
               </div>
-              <img src='/icons/dots.svg' alt='dots' />
+              <img src={Dots} alt='dots' />
             </button>
             <ul className='dropdown-menu'>
               <li>
@@ -60,12 +65,12 @@ export const RequestHistory: React.FC<RequestHistoryType> = ({ runHistoryRequest
                   type='button'
                   onClick={() => runHistoryRequest(item)}
                 >
-                  Выполнить
+                  {doSelectItem}
                 </button>
               </li>
               <li>
                 <button className='custom__dropdown__item custom__dropdown__item__standart' type='button' onClick={() => copyRequest(item)}>
-                  Скопировать
+                  {copySelectItem}
                 </button>
               </li>
               <li>
@@ -77,7 +82,7 @@ export const RequestHistory: React.FC<RequestHistoryType> = ({ runHistoryRequest
                   type='button'
                   onClick={() => removeHistoryItem(item)}
                 >
-                  Удалить
+                  {deleteSelectItem}
                 </button>
               </li>
             </ul>
@@ -88,7 +93,7 @@ export const RequestHistory: React.FC<RequestHistoryType> = ({ runHistoryRequest
       </div>
       <div className='clear-history'>
         <button style={{ border: 'none', backgroundColor: 'transparent' }} onClick={clearHistory}>
-          <img src='/icons/cross.svg' alt='clear' />
+          <img src={Clear} alt='clear' />
         </button>
       </div>
     </div>
