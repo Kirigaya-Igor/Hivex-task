@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/Hivex-task/static/css/main.dac8a1fd.css",
-    "main.js": "/Hivex-task/static/js/main.b1af350e.js",
+    "main.js": "/Hivex-task/static/js/main.e1d447f7.js",
     "index.html": "/Hivex-task/index.html",
     "static/media/small-screen.svg": "/Hivex-task/static/media/small-screen.4e9a082b823ac56a8d457640bc49351b.svg",
     "static/media/full-screen.svg": "/Hivex-task/static/media/full-screen.4b810468fea708294d8d905f97cc1c66.svg",
     "static/media/format.svg": "/Hivex-task/static/media/format.a7600ce9114216aa98d962fd092c9b1a.svg",
     "static/media/dots.svg": "/Hivex-task/static/media/dots.be0115d499a001cdf47a.svg",
     "main.dac8a1fd.css.map": "/Hivex-task/static/css/main.dac8a1fd.css.map",
-    "main.b1af350e.js.map": "/Hivex-task/static/js/main.b1af350e.js.map"
+    "main.e1d447f7.js.map": "/Hivex-task/static/js/main.e1d447f7.js.map"
   },
   "entrypoints": [
     "static/css/main.dac8a1fd.css",
-    "static/js/main.b1af350e.js"
+    "static/js/main.e1d447f7.js"
   ]
 }
