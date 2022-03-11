@@ -1,27 +1,19 @@
-import { logout } from '@toolkitSlice/toolkitSlice';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import './consoleHeader.scss';
-import { ReactComponent as SmallScreen } from '@icons/small-screen.svg';
+import { RootStateType } from '@store/index';
+import { logout } from '@toolkitSlice/toolkitSlice';
 import { ReactComponent as FullllScreen } from '@icons/full-screen.svg';
+import { ReactComponent as SmallScreen } from '@icons/small-screen.svg';
+import Logo from '@icons/logo.svg';
+import LogOut from '@icons/log-out.svg';
+import { appTitle, logoutButtonName } from '@namingList/namingList';
+import './consoleHeader.scss';
 
 export const ConsoleHeader = () => {
-  //@ts-ignore
-  const login = useSelector(state => state.auth.login);
-  //@ts-ignore
-  const sublogin = useSelector(state => state.auth.sublogin);
-  //@ts-ignore
-  const isLoggedIn = useSelector(state => !!state.auth.sessionKey?.length);
+  const login = useSelector((state: RootStateType) => state.auth.login);
+  const sublogin = useSelector((state: RootStateType) => state.auth.sublogin);
   const dispatch = useDispatch();
-  const history = useHistory();
   const [fullScreen, setFullScreen] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      history.push('/');
-    }
-  }, [isLoggedIn]);
 
   const clickLogout = () => {
     dispatch(logout());
@@ -40,7 +32,7 @@ export const ConsoleHeader = () => {
   return (
     <nav className='navbar navbar-expand-lg navbar-light console-header'>
       <div className='container-fluid'>
-        <img src='/icons/logo.svg' alt='' className='navbar-brand' />
+        <img src={Logo} alt='brand' className='navbar-brand' />
         <button
           className='navbar-toggler'
           type='button'
@@ -54,15 +46,15 @@ export const ConsoleHeader = () => {
         </button>
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <div className='d-flex justify-content-between flex-column flex-lg-row w-100' style={{ paddingRight: '30px' }}>
-            <span className='console-header__title'>API-консолька</span>
+            <span className='console-header__title'>{appTitle}</span>
 
             <div className='d-flex justify-content-between align-items-lg-center flex-column flex-lg-row'>
-              <div className='console-header__loginBlock'>{`${login} ${sublogin ? `: ${sublogin}` : ''}`}</div>
+              <button type='button' className='console-header__loginBlock'>{`${login} ${sublogin ? `: ${sublogin}` : ''}`}</button>
 
               <div>
                 <button onClick={clickLogout} type='button' className='console-header__logoutButton'>
-                  Выйти
-                  <img src='/icons/log-out.svg' alt='logout' style={{ marginLeft: '10px' }} />
+                  {logoutButtonName}
+                  <img src={LogOut} alt='logout' style={{ marginLeft: '10px' }} />
                 </button>
               </div>
 

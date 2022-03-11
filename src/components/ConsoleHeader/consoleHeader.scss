@@ -1,5 +1,11 @@
+$white-color: #FFFFFF;
+$custom-blue: #0055FB;
+$light-gray: #F6F6F6;
+$black-opacity-02: rgba(0, 0, 0, 0.2);
+$black-opacity-04: rgba(0, 0, 0, 0.4);
+
 .console-header {
-    background-color: #F6F6F6;
+    background-color: $light-gray;
     height: 55px;
 
     &__title {
@@ -8,11 +14,21 @@
     }
 
     &__loginBlock {
-        border: 1px solid rgba(0, 0, 0, 0.2);
+        border: 1px solid $black-opacity-02;
         box-sizing: border-box;
         border-radius: 5px;
         padding: 5px 15px;
         width: fit-content;
+        background: $white-color;
+
+        &:hover {
+            border: 1px solid $black-opacity-04;
+        }
+
+        &:focus {
+            border: 1px solid $black-opacity-04;
+            box-shadow: 0px 0px 0px 2px $black-opacity-02;
+        }
 
         @media screen and (max-width: 992px) {
             margin-top: 10px;
@@ -45,14 +61,14 @@
         }
 
         &:hover * {
-            stroke: #0055FB;
+            stroke: $custom-blue;
         }
 
         &:focus {
             border: 2px solid rgba(69, 165, 255, 0.5);
 
             * {
-                stroke: #0055FB;
+                stroke: $custom-blue;
             }
         }
     }

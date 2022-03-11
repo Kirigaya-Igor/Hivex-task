@@ -1,7 +1,11 @@
+$white-color: #FFFFFF;
+$custom-blue: #0055FB;
+$error-color: red;
+
 .console-body {
     height: calc(100% - 110px);
     width: 100%;
-    background: #FFFFFF;
+    background: $white-color;
 
     &__panels {
         height: calc(100% - 70px);
@@ -10,8 +14,14 @@
         overflow: auto;
     }
 
-    &____title {
+    &__title {
         height: 25px;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    &__title-err {
+        color: $error-color;
     }
 
     &__panel-block {
@@ -21,11 +31,16 @@
 
     &__panel {
         height: calc(100% - 25px);
-        background: #FFFFFF;
+        background: $white-color;
         border: 1px solid rgba(0, 0, 0, 0.2);
         box-sizing: border-box;
         border-radius: 5px;
         margin-top: 5px;
+        font-family: monospace;
+    }
+
+    &__panel-err {
+        border: 1px solid $error-color;
     }
 
     &__textarea {
@@ -36,13 +51,17 @@
         border: none;
         border-radius: 5px;
         resize: none;
+
+        &:disabled {
+            background: $white-color;
+        }
     }
 
     &__footer {
         margin: 0;
         min-height: 70px;
         width: 100%;
-        background: #FFFFFF;
+        background: $white-color;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -58,19 +77,19 @@
         border-radius: 7px;
 
         &:hover {
-            color: #0055FB;
+            color: $custom-blue;
 
             * {
-                stroke: #0055FB;
+                stroke: $custom-blue;
             }
         }
 
         &:focus {
             border: 2px solid rgba(69, 165, 255, 0.5);
-            color: #0055FB;
+            color: $custom-blue;
 
             * {
-                stroke: #0055FB;
+                stroke: $custom-blue;
             }
         }
     }

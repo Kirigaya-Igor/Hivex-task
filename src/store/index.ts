@@ -1,10 +1,10 @@
+import { combineReducers } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import { configureStore } from '@reduxjs/toolkit';
 import rootSaga from '@store/sagas';
 import rootReducer from '@toolkitSlice/toolkitSlice';
-import { combineReducers } from 'redux';
-import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import createSagaMiddleware from 'redux-saga';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -41,3 +41,5 @@ store.runSagaTask();
 
 //@ts-ignore
 export const persistor = persistStore(store);
+
+export type RootStateType = ReturnType<typeof store.getState>;

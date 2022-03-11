@@ -1,9 +1,15 @@
+$white-color: #FFFFFF;
+$custom-blue: #0055FB;
+$light-gray: #F6F6F6;
+$black-opacity-02: rgba(0, 0, 0, 0.2);
+$black-opacity-06: rgba(0, 0, 0, 0.6);
+
 .request-history {
     width: 100%;
     padding: 10px 15px;
-    background-color: #F6F6F6;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: $light-gray;
+    border-bottom: 1px solid $black-opacity-02;
+    border-top: 1px solid $black-opacity-02;
     display: flex;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -15,24 +21,47 @@
     }
 
     &__item {
-        width: fit-content;
-        background-color: #FFFFFF;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        background-color: $white-color;
+        box-shadow: 0px 2px 4px $black-opacity-02;
         border-radius: 5px;
         margin: 0px 10px;
         padding: 5px 10px;
+        border: none;
         display: flex;
         align-items: center;
-        border: none;
+        justify-content: space-between;
         height: 33px;
+        position: relative;
 
         &:hover {
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+            box-shadow: 0px 2px 4px $black-opacity-06;
         }
     }
 
     &__text {
         margin: 0px 10px;
+    }
+    
+    &__copy-text {
+        color: black;
+        background: $light-gray;
+        border-radius: 5px;
+        padding: 5px;
+        animation: copy 3s 1 forwards;
+        font-size: 12px;
+        position: absolute;
+        top: 50%;
+        left:50%;
+        transform:translate(-50%, -50%);
+        z-index: 100;
+    }
+
+    @keyframes copy {
+        100% {
+            opacity: 0.3;
+            display: none;
+            top: -30px;
+        }
     }
 
     .custom__dropdown__item {
@@ -44,15 +73,15 @@
 
         &__standart {
             &:hover {
-                background: #0055FB;
-                color: white;
+                background: $custom-blue;
+                color: $white-color;
             }
         }
 
         &__delete {
             &:hover {
                 background: #CF2C00;
-                color: white;
+                color: $white-color;
             }
         }
     }
@@ -61,13 +90,13 @@
 .clear-history {
     min-width: 50px;
     height: 55px;
-    background-color: #F6F6F6;
+    background-color: $light-gray;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    border-top: 1px solid rgba(0, 0, 0, 0.2);
-    border-left: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid $black-opacity-02;
+    border-top: 1px solid $black-opacity-02;
+    border-left: 1px solid $black-opacity-02;
 }
 
 .history-gradient {
@@ -77,5 +106,5 @@
     min-width: 30px;
     height: 50px;
     pointer-events: none;
-    background: linear-gradient(269.93deg, #F6F6F6 0.06%, rgba(246, 246, 246, 0) 99.93%);
+    background: linear-gradient(269.93deg, $light-gray 0.06%, rgba(246, 246, 246, 0) 99.93%);
 }
