@@ -2,9 +2,10 @@ import { all, put, call, takeLatest } from 'redux-saga/effects';
 import api from '../../helpers/sendsay';
 
 import { ActionTypes } from '../constants';
-import { authenticateSuccess, authenticateFailure, showAlert } from '../actions/auth';
+import { authenticate, authenticateSuccess, authenticateFailure, showAlert, logout } from '@toolkitSlice/toolkitSlice';
 
 export function* authenticateCheckSaga() {
+  console.log('authenticateCheckSaga');
   try {
     yield api.sendsay.request({
       action: 'pong',
@@ -29,9 +30,17 @@ export function* authenticateSaga({ payload }) {
       .then(() => {
         document.cookie = `sendsay_session=${api.sendsay.session}`;
       });
+
+    yield put(
+      authenticateSuccess({
+        sessionKey: api.sendsay.session,
+        login: payload.login,
+        sublogin: payload.sublogin,
+      })
+    );
   } catch (e) {
-    console.log('err', e);
-    document.cookie = '';
+    document.cookie = 'sendsay_session=';
+    document.cookie = 'sendsay_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     yield put(
       showAlert({
         showAlert: true,
@@ -40,26 +49,19 @@ export function* authenticateSaga({ payload }) {
       })
     );
   }
-
-  yield put(
-    authenticateSuccess({
-      sessionKey: api.sendsay.session,
-      login: payload.login,
-      sublogin: payload.sublogin,
-    })
-  );
 }
 
 export function* logoutSaga() {
   yield put(authenticateFailure());
-  document.cookie = '';
+  document.cookie = 'sendsay_session=';
+  document.cookie = 'sendsay_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 }
 
 export default function* root() {
   yield all([
     //@ts-ignore
-    takeLatest(ActionTypes.AUTHENTICATE, authenticateSaga),
+    takeLatest(authenticate, authenticateSaga),
     takeLatest(ActionTypes.AUTHENTICATE_CHECK, authenticateCheckSaga),
-    takeLatest(ActionTypes.LOGOUT, logoutSaga),
+    takeLatest(logout, logoutSaga),
   ]);
 }

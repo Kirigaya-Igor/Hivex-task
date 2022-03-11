@@ -1,48 +1,43 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import createSagaMiddleware from 'redux-saga';
-import { persistStore, persistReducer } from 'redux-persist';
+import { configureStore } from '@reduxjs/toolkit';
+import rootSaga from '@store/sagas';
+import rootReducer from '@toolkitSlice/toolkitSlice';
+import { combineReducers } from 'redux';
+import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-
-import rootReducer from '../store/reducers/index';
-import rootSaga from '../store/sagas/index';
+import createSagaMiddleware from 'redux-saga';
 
 const sagaMiddleware = createSagaMiddleware();
+
 const persistConfig = {
   key: 'root',
   storage,
 };
+
+const mainReducer = combineReducers({
+  auth: rootReducer,
+});
+
+const persistedReducer = persistReducer(persistConfig, mainReducer);
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(sagaMiddleware),
+  devTools: process.env.NODE_ENV !== 'production',
+});
+
 //@ts-ignore
-const bindMiddleware = middleware => {
-  if (process.env.NODE_ENV !== 'production') {
-    const { composeWithDevTools } = require('redux-devtools-extension');
-    return composeWithDevTools(applyMiddleware(...middleware));
-  }
-  return applyMiddleware(...middleware);
+store.runSagaTask = () => {
+  //@ts-ignore
+  store.sagaTask = sagaMiddleware.run(rootSaga);
 };
 
-function configureStore(initialState = {}) {
-  const store = createStore(
-    combineReducers({
-      auth: persistReducer(persistConfig, rootReducer.auth),
-    }),
-    initialState,
-    bindMiddleware([sagaMiddleware])
-  );
-  //@ts-ignore
-  const persistor = persistStore(store);
+//@ts-ignore
+store.runSagaTask();
 
-  //@ts-ignore
-  store.runSagaTask = () => {
-    //@ts-ignore
-    store.sagaTask = sagaMiddleware.run(rootSaga);
-  };
-
-  //@ts-ignore
-  store.runSagaTask();
-  return {
-    store,
-    persistor,
-  };
-}
-
-export default configureStore;
+//@ts-ignore
+export const persistor = persistStore(store);

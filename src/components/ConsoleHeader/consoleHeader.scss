@@ -1,0 +1,59 @@
+.console-header {
+    background-color: #F6F6F6;
+    height: 55px;
+
+    &__title {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    &__loginBlock {
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        box-sizing: border-box;
+        border-radius: 5px;
+        padding: 5px 15px;
+        width: fit-content;
+
+        @media screen and (max-width: 992px) {
+            margin-top: 10px;
+        }
+    }
+
+    &__logoutButton {
+        border: none;
+        margin: 0px 50px;
+        padding: 5px 15px;
+        background-color: transparent;
+
+        @media screen and (max-width: 992px) {
+            margin: 0px;
+            margin-top: 10px;
+            padding: 5px 15px 5px 0px;
+        }
+    }
+
+    &__screenSize {
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        border: 2px solid rgba(69, 165, 255, 0);
+        border-radius: 7px;
+        background-color: transparent;
+        
+        @media screen and (max-width: 992px) {
+            margin-top: 10px;
+        }
+
+        &:hover * {
+            stroke: #0055FB;
+        }
+
+        &:focus {
+            border: 2px solid rgba(69, 165, 255, 0.5);
+
+            * {
+                stroke: #0055FB;
+            }
+        }
+    }
+}
