@@ -3945,6 +3945,31 @@ ee-first@1.1.1:
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
+effector-persist@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/effector-persist/-/effector-persist-1.0.3.tgz#35cf995619898e9fb4a19ecb9e6902f123563a6c"
+  integrity sha512-D3hH61WTYmY9GRBob0yP6d8NKaNBEqIzxoHCkJ30EegPUk2tk3qqmOlm391r54UuubTZjFClCHfKCx3VLS433Q==
+  dependencies:
+    effector "^20.3.0"
+    typescript "^3.6.3"
+
+effector-react@^22.0.6:
+  version "22.0.6"
+  resolved "https://registry.yarnpkg.com/effector-react/-/effector-react-22.0.6.tgz#e6651febfc124a8adf550deb950fbd03dfb9ec4e"
+  integrity sha512-uzVjrh5S94eMeihu8N8eQvLFnZA56VT00etMVovnSyZxujo0f8gtZZebIYOKyYFkGcYUyfiOHRRzBhYpIfAIhg==
+
+effector@^20.3.0:
+  version "20.17.2"
+  resolved "https://registry.yarnpkg.com/effector/-/effector-20.17.2.tgz#825987cdbf91b062e01074b5b47bcca9720efe94"
+  integrity sha512-Msbq6xem+Dal9BzReq6qqSKcb3ey4gVeJzG9S3wRVSPmErs8886STqGFGz9BbxrBR7Xy52cEMfI7KsBmmT1K7A==
+  dependencies:
+    symbol-observable "^1.2.0"
+
+effector@^22.2.0:
+  version "22.2.0"
+  resolved "https://registry.yarnpkg.com/effector/-/effector-22.2.0.tgz#61667313cbe4fddeb9983582c3b59e1aae3603ec"
+  integrity sha512-N0dDgEO3/b9InYkPsoSM5YSJgVwJ1bQ/DWHU7C6sm9+L1CrT6gat0pLvey/ljFPNdNKL0S6MW5DEmDUvzJe1Ng==
+
 ejs@^3.1.6:
   version "3.1.6"
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-3.1.6.tgz#5bfd0a0689743bb5268b3550cceeebbc1702822a"
@@ -8822,7 +8847,7 @@ svgo@^2.7.0:
     picocolors "^1.0.0"
     stable "^0.1.8"
 
-symbol-observable@^1.0.3:
+symbol-observable@^1.0.3, symbol-observable@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
   integrity sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
@@ -9121,6 +9146,11 @@ typescript-tuple@^2.2.1:
   integrity sha512-Zcr0lbt8z5ZdEzERHAMAniTiIKerFCMgd7yjq1fPnDJ43et/k9twIFQMUYff9k5oXcsQ0WpvFcgzK2ZKASoW6Q==
   dependencies:
     typescript-compare "^0.0.2"
+
+typescript@^3.6.3:
+  version "3.9.10"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.10.tgz#70f3910ac7a51ed6bef79da7800690b19bf778b8"
+  integrity sha512-w6fIxVE/H1PkLKcCPsFqKE7Kv7QUwhU8qQY2MueZXWx5cPZdwFupLgKK3vntcK98BtNHZtAF4LA/yl2a7k8R6Q==
 
 typescript@^4.5.5:
   version "4.5.5"

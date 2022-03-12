@@ -1,13 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootStateType } from '@store/index';
-import { clearRequestHistory, copyRequestHistory, removeRequestHistory, requestHistoryArrType } from '@store/toolkitSlice/toolkitSlice';
+// import { clearRequestHistory, copyRequestHistory, removeRequestHistory, requestHistoryArrType } from '@toolkitSlice/toolkitSlice';
 import GoodRequest from '@icons/good-request.svg';
 import BadRequest from '@icons/bad-request.svg';
 import Clear from '@icons/cross.svg';
 import Dots from '@icons/dots.svg';
 import './requestHistory.scss';
 import { copySelectItem, deleteSelectItem, doSelectItem, itemCoped } from '@namingList/namingList';
+import { useStore } from 'effector-react';
+import { $appState, requestHistoryArrType, copyRequestHistory, removeRequestHistory, clearRequestHistory } from '@effectorStore/model';
 
 type RequestHistoryType = {
   runHistoryRequest: (item: requestHistoryArrType) => void;
@@ -15,7 +17,9 @@ type RequestHistoryType = {
 
 export const RequestHistory: React.FC<RequestHistoryType> = ({ runHistoryRequest }) => {
   const dispatch = useDispatch();
-  const requestHistoryArr: Array<requestHistoryArrType> = useSelector((state: RootStateType) => state.auth.requestHistoryArr);
+  // const requestHistoryArr: Array<requestHistoryArrType> = useSelector((state: RootStateType) => state.auth.requestHistoryArr);
+
+  const { requestHistoryArr } = useStore($appState);
 
   const onWheel = (e: React.WheelEvent<HTMLDivElement>) => {
     e.currentTarget.scrollTo({
@@ -29,20 +33,24 @@ export const RequestHistory: React.FC<RequestHistoryType> = ({ runHistoryRequest
 
     try {
       theClipboard.writeText(item.body);
-      dispatch(copyRequestHistory({ ...item, isCopied: true }));
+      // dispatch(copyRequestHistory({ ...item, isCopied: true }));
+      copyRequestHistory({ ...item, isCopied: true });
 
-      setTimeout(() => dispatch(copyRequestHistory({ ...item, isCopied: false })), 1000);
+      // setTimeout(() => dispatch(copyRequestHistory({ ...item, isCopied: false })), 1000);
+      setTimeout(() => copyRequestHistory({ ...item, isCopied: false }), 1000);
     } catch (err) {
       console.error('Failed to copy!', err);
     }
   };
 
   const removeHistoryItem = (item: requestHistoryArrType) => {
-    dispatch(removeRequestHistory(item));
+    // dispatch(removeRequestHistory(item));
+    removeRequestHistory(item);
   };
 
   const clearHistory = () => {
-    dispatch(clearRequestHistory());
+    // dispatch(clearRequestHistory());
+    clearRequestHistory();
   };
 
   return (
