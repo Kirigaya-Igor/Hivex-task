@@ -3,13 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootStateType } from '@store/index';
 import { showAlert } from '@toolkitSlice/toolkitSlice';
 import { alertErrorTitle } from '@namingList/namingList';
+import ErrorIcon from '@icons/errorIcon.png';
 import './alert.scss';
+import { useStore } from 'effector-react';
+import { $appState, closeAlert } from '@effectorStore/model';
 
 export const Alert: React.FC = () => {
   const [alertMsg, setAlertMsg] = useState<string>('');
   const dispatch = useDispatch();
-  const showAlertState = useSelector((state: RootStateType) => state.auth.showAlert);
-  const alertMessage = useSelector((state: RootStateType) => state.auth.alertMessage);
+  // const showAlertState = useSelector((state: RootStateType) => state.auth.showAlert);
+  // const alertMessage = useSelector((state: RootStateType) => state.auth.alertMessage);
+
+  const appState = useStore($appState);
+
+  const showAlertState = appState.showAlert;
+  const alertMessage = appState.alertMessage;
 
   const showAlertFunction = () => {
     alertMessage && setAlertMsg(`{id: ${alertMessage.id}, explain: ${alertMessage.explain}}`);
@@ -29,12 +37,13 @@ export const Alert: React.FC = () => {
   }, [showAlertState]);
 
   const hideAlert = () => {
-    dispatch(
-      showAlert({
-        showAlert: false,
-        alertMessage: null,
-      })
-    );
+    // dispatch(
+    //   showAlert({
+    //     showAlert: false,
+    //     alertMessage: null,
+    //   })
+    // );
+    closeAlert();
   };
 
   return (
@@ -43,7 +52,7 @@ export const Alert: React.FC = () => {
         <div className='alert alert-dismissible customAlert'>
           <div className='customAlert__warning'>
             <div className='d-flex align-items-center'>
-              <img src='/icons/errorIcon.png' alt='icon' style={{ marginRight: '15px' }} />
+              <img src={ErrorIcon} alt='icon' style={{ marginRight: '15px' }} />
               <strong>{alertErrorTitle}</strong>
             </div>
             <span className='customAlert__message'>{alertMsg}</span>

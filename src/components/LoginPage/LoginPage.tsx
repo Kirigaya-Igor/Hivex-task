@@ -20,6 +20,8 @@ import {
   passwordPlaceholder,
 } from '@namingList/namingList';
 import './loginPage.scss';
+import { $appState, loginButtonClicked } from '@effectorStore/model';
+import { useStore } from 'effector-react';
 
 interface MyFormValues {
   login: string;
@@ -30,13 +32,18 @@ interface MyFormValues {
 const LoginPage: React.FC = () => {
   const initialValues: MyFormValues = { login: '', sublogin: '', password: '' };
   const dispatch = useDispatch();
-  const loading = useSelector((state: RootStateType) => state.auth.loading);
-  const isLoggedIn = useSelector((state: RootStateType) => !!state.auth.sessionKey?.length);
+  // const loading = useSelector((state: RootStateType) => state.auth.loading);
+  // const isLoggedIn = useSelector((state: RootStateType) => !!state.auth.sessionKey?.length);
   const history = useHistory();
+
+  const appState = useStore($appState);
+
+  const loading = appState.loading;
+  const isLoggedIn = !!appState.sessionKey?.length;
 
   useEffect(() => {
     isLoggedIn && history.push('/console');
-  }, [isLoggedIn]);
+  }, [isLoggedIn, appState]);
 
   const doLogin = (login: string, sublogin: string, password: string) => {
     dispatch(
@@ -49,7 +56,8 @@ const LoginPage: React.FC = () => {
   };
 
   function onSubmit(values: MyFormValues) {
-    doLogin(values.login, values.sublogin, values.password);
+    // doLogin(values.login, values.sublogin, values.password);
+    loginButtonClicked(values);
   }
 
   const validate = (values: MyFormValues) => {

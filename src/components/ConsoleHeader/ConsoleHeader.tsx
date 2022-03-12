@@ -8,15 +8,20 @@ import Logo from '@icons/logo.svg';
 import LogOut from '@icons/log-out.svg';
 import { appTitle, logoutButtonName } from '@namingList/namingList';
 import './consoleHeader.scss';
+import { useStore } from 'effector-react';
+import { $appState, logoutButtonClicked } from '@effectorStore/model';
 
 export const ConsoleHeader = () => {
-  const login = useSelector((state: RootStateType) => state.auth.login);
-  const sublogin = useSelector((state: RootStateType) => state.auth.sublogin);
+  // const login = useSelector((state: RootStateType) => state.auth.login);
+  // const sublogin = useSelector((state: RootStateType) => state.auth.sublogin);
   const dispatch = useDispatch();
   const [fullScreen, setFullScreen] = useState<boolean>(false);
 
+  const { login, sublogin } = useStore($appState);
+
   const clickLogout = () => {
-    dispatch(logout());
+    // dispatch(logout());
+    logoutButtonClicked();
   };
 
   function toggleFullScreen() {
@@ -25,7 +30,6 @@ export const ConsoleHeader = () => {
     } else if (document.exitFullscreen) {
       document.exitFullscreen();
     }
-
     setFullScreen(prev => !prev);
   }
 

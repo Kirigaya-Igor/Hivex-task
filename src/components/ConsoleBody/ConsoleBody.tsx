@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Split from 'react-split';
-import { addRequestHistory, requestHistoryArrType } from '@store/toolkitSlice/toolkitSlice';
+// import { addRequestHistory, requestHistoryArrType } from '@toolkitSlice/toolkitSlice';
 import api from '@helpers/sendsay';
 import { RequestHistory } from '@components/RequestHistory/RequestHistory';
 import { ReactComponent as FormatIcon } from '@icons/format.svg';
@@ -16,6 +16,7 @@ import {
   responsePlaceholder,
 } from '@namingList/namingList';
 import './consoleBody.scss';
+import { addRequestHistory, requestHistoryArrType } from '@effectorStore/model';
 
 export const ConsoleBody = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ export const ConsoleBody = () => {
   const refLeft = useRef(null);
   const [panelsSize, setPanelsSize] = useState([50, 50]);
 
-  const [request, setRequest] = useState('');
+  const [requestInput, setRequestInput] = useState('');
   const [requestErr, setRequestErr] = useState(false);
 
   const [response, setResponse] = useState('Отет сервера');
@@ -47,7 +48,7 @@ export const ConsoleBody = () => {
 
   const formatRequest = (request: string) => {
     try {
-      setRequest(JSON.stringify(JSON.parse(request), null, 2));
+      setRequestInput(JSON.stringify(JSON.parse(request), null, 2));
       setRequestErr(false);
     } catch (e) {
       setRequestErr(true);
@@ -59,12 +60,13 @@ export const ConsoleBody = () => {
     const item = {
       id: obj.action + Date.now(),
       title: obj.action,
-      body: request,
+      body: JSON.stringify(JSON.parse(request), null, 2),
       isCopied: false,
       isSuccess,
     };
 
-    dispatch(addRequestHistory(item));
+    // dispatch(addRequestHistory(item));
+    addRequestHistory(item);
   };
 
   const sendRequest = async (request: string) => {
@@ -111,8 +113,8 @@ export const ConsoleBody = () => {
             <textarea
               className='console-body__textarea'
               placeholder={requestPlaceholder}
-              value={request}
-              onChange={e => setRequest(e.target.value)}
+              value={requestInput}
+              onChange={e => setRequestInput(e.target.value)}
               disabled={loading && true}
             ></textarea>
           </div>
@@ -134,7 +136,7 @@ export const ConsoleBody = () => {
                 <span className='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>
               </button>
             ) : (
-              <button type='submit' className='submit-button' onClick={() => sendRequest(request)}>
+              <button type='submit' className='submit-button' onClick={() => sendRequest(requestInput)}>
                 {sendButtonName}
               </button>
             )}
@@ -146,7 +148,7 @@ export const ConsoleBody = () => {
           </a>
         </div>
         <div className='col-12 col-sm-5 col-md-4 d-flex justify-content-sm-end mt-3 mt-sm-0'>
-          <button type='submit' className='console-body__format-button' onClick={() => formatRequest(request)}>
+          <button type='submit' className='console-body__format-button' onClick={() => formatRequest(requestInput)}>
             <FormatIcon style={{ marginRight: '10px' }} />
             {formatButtonName}
           </button>

@@ -2,13 +2,14 @@
     "compilerOptions": {
       "baseUrl": ".",
       "paths": {
-        "@store/*": ["src/store/*"],
-        "@toolkitSlice/*": ["src/store/toolkitSlice/*"],
-        "@sagas/*": ["src/store/sagas/*"],
+        "@store/*": ["src/store_redux/*"],
+        "@toolkitSlice/*": ["src/store_redux/toolkitSlice/*"],
+        "@sagas/*": ["src/store_redux/sagas/*"],
         "@components/*": ["src/components/*"],
         "@icons/*": ["public/icons/*"],
         "@helpers/*": ["src/helpers/*"],
-        "@namingList/*": ["public/*"]
+        "@namingList/*": ["public/*"],
+        "@effectorStore/*": ["src/store_effector/*"]
       }
     }
   }
